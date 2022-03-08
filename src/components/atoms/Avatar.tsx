@@ -1,15 +1,10 @@
-import { Image, StyleSheet } from 'react-native';
+import {Image, StyleSheet} from 'react-native';
 import React from 'react';
 
-import defaultAvatar from '../../assets/images/default-avatar.png';
+const defaultAvatar = require('assets/images/default-avatar.png');
 
 const Avatar = () => {
-  return (
-    <Image
-      style={styles.image}
-      source={defaultAvatar}
-    />
-  );
+  return <Image style={styles.image} source={defaultAvatar} />;
 };
 
 export default Avatar;
