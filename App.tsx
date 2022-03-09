@@ -1,17 +1,8 @@
-import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-
-import MyGroupsScreen from '~features/my-groups/MyGroupsScreen';
+import RootNavigator from 'navigation/RootNavigator';
 
 const App = () => {
-  return (
-    <NavigationContainer>
-      <MyGroupsScreen />
-    </NavigationContainer>
-  );
+  return <RootNavigator />;
 };
 
 export default App;
-
-const styles = StyleSheet.create({});

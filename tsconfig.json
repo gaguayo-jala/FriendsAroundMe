@@ -45,6 +45,7 @@
       "~features/*": ["./src/features/*"],
       "~services/*": ["./src/services/*"],
       "~styles/*": ["./src/styles/*"],
+      "~navigation/*": ["./src/navigation/*"],
     },
     // "rootDirs": [],                        /* List of root folders whose combined content represents the structure of the project at runtime. */
     // "typeRoots": [],                       /* List of folders to include type definitions from. */
