@@ -1,20 +1,21 @@
 import {StyleSheet, Text, View, Button} from 'react-native';
-import React from 'react';
+import React, {useContext} from 'react';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 import RootStackParamList from '~navigation/RootStackParamList';
+import {AppContext} from '~state/AppContext';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'login'>;
 
-const LoginScreen: React.FC<Props> = ({navigation}) => {
-  const goToHome = () => {
-    navigation.replace('home');
-  };
+type LoginScreenProps = {};
+
+const LoginScreen: React.FC<LoginScreenProps & Props> = ({}) => {
+  const {login, isAuthenticated} = useContext(AppContext);
 
   return (
     <View>
-      <Text>LoginScreen</Text>
-      <Button title="Go To Home" onPress={goToHome} />
+      <Text>LoginScreen: {isAuthenticated ? 'TRUE' : 'FALSE'}</Text>
+      <Button title="Login In Memory" onPress={login} />
     </View>
   );
 };

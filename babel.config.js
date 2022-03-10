@@ -12,6 +12,7 @@ module.exports = {
           '~services': './src/services',
           '~styles': './src/styles',
           '~navigation': './src/navigation',
+          '~state': './src/state',
         },
         extensions: [
           '.ios.js',

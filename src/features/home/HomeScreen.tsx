@@ -1,18 +1,17 @@
 import {StyleSheet, Text, View, Button} from 'react-native';
-import React from 'react';
+import React, {useContext} from 'react';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 import RootStackParamList from '~navigation/RootStackParamList';
+import {AppContext} from '~state/AppContext';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'home'>;
 
 const HomeScreen: React.FC<Props> = ({navigation}) => {
+  const {logout} = useContext(AppContext);
+
   const goToMyGroups = () => {
     navigation.navigate('myGroups');
-  };
-
-  const logout = () => {
-    navigation.replace('login');
   };
 
   return (
