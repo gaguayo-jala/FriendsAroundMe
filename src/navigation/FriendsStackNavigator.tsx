@@ -9,8 +9,14 @@ import RootStackParamList from './RootStackParamList';
 import {AppContext} from '~state/AppContext';
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
+import LoadingScreen from './LoadingScreen';
+
 const FriendsStackNavigator = () => {
-  const {isAuthenticated} = useContext(AppContext);
+  const {isAuthenticated, isLoading} = useContext(AppContext);
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <Stack.Navigator>

@@ -1,21 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
 import RootNavigator from '~navigation/RootNavigator';
 import {AppContext} from '~state/AppContext';
+import {AppState} from './App.state';
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const state = AppState();
 
   return (
-    <AppContext.Provider
-      value={{
-        isAuthenticated,
-        logout: () => {
-          setIsAuthenticated(false);
-        },
-        login: function () {
-          setIsAuthenticated(true);
-        },
-      }}>
+    <AppContext.Provider value={state.value}>
       <RootNavigator />
     </AppContext.Provider>
   );

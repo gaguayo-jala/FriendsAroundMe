@@ -14,6 +14,8 @@ module.exports = {
           '~navigation': './src/navigation',
           '~state': './src/state',
           '~store': './src/store',
+          '~models': './src/models',
+          '~constants': './src/constants',
         },
         extensions: [
           '.ios.js',
