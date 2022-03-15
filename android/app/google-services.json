@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "649635965577",
+    "project_id": "friendsaroundme-4ab4b",
+    "storage_bucket": "friendsaroundme-4ab4b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:649635965577:android:46300ada1e15de89493458",
+        "android_client_info": {
+          "package_name": "com.friendsaroundme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "649635965577-usejac1ftci50quhu49pbv1ktkqbq5rl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRmrCQ-hzFMAua9csU712aJlRhCAmobJ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "649635965577-usejac1ftci50quhu49pbv1ktkqbq5rl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

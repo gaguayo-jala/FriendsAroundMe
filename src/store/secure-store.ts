@@ -1,4 +1,5 @@
-import Storage from 'react-native-encrypted-storage';
+// import Storage from 'react-native-encrypted-storage';
+import Storage from '@react-native-async-storage/async-storage';
 
 export const save = async (key: string, value: any) => {
   let valueString = (value || '').toString();
