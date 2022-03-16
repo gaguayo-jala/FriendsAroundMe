@@ -3,27 +3,28 @@ import React, {useContext} from 'react';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 import RootStackParamList from '~navigation/RootStackParamList';
-import {AppContext} from '~state/AppContext';
+import MyGroups from './components/MyGroups';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'home'>;
 
-const HomeScreen: React.FC<Props> = ({navigation}) => {
-  const {logout} = useContext(AppContext);
-
-  const goToMyGroups = () => {
-    navigation.navigate('myGroups');
-  };
-
+const HomeScreen: React.FC<Props> = ({}) => {
   return (
-    <View>
-      <Text>HomeScreen</Text>
+    <View style={styles.main}>
+      <View style={styles.map}></View>
 
-      <Button title="My Groups" onPress={goToMyGroups} />
-      <Button title="Logout" onPress={logout} />
+      <MyGroups />
     </View>
   );
 };
 
 export default HomeScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  main: {
+    flex: 1,
+  },
+  map: {
+    height: 200,
+    backgroundColor: 'grey',
+  },
+});
