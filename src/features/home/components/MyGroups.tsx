@@ -1,16 +1,19 @@
 import {ScrollView, StyleSheet} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
+import {useSelector} from 'react-redux';
 
-import MyGroupListItem from './MyGroupListItem';
-import {GetAllGroups} from '../services/my-groups-service';
+import {RootState} from '~store/index';
+import MyGroupListItem from './MyGroupListItem';;
 import Group from '~models/group';
 
 const MyGroups = () => {
-  const [groups, setGroups] = useState<Group[]>([]);
+  const groups: Group[] = useSelector(
+    (state: RootState) => state.groups.groups,
+  );
 
   const loadMyGroups = async () => {
-    const allGroups = await GetAllGroups();
-    setGroups(allGroups);
+    // const allGroups = await GetAllGroups();
+    // setGroups(allGroups);
   };
 
   useEffect(() => {
