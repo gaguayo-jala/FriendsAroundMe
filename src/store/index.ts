@@ -9,7 +9,6 @@ const middlewares = getDefaultMiddleware({
 });
 
 if (__DEV__) {
-  console.log('DEV Flippper');
   const flipperDebugger = require('redux-flipper').default;
   middlewares.push(flipperDebugger());
 }

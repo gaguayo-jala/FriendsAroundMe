@@ -1,4 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
+import { RootState } from '~store/index';
 
 export type HomeState = {
   chats: any[];
@@ -15,3 +16,5 @@ export const homeSlice = createSlice({
 });
 
 export default homeSlice.reducer;
+
+export const selectAllGroups = (state: RootState) => state.groups.groups;

@@ -1,4 +1,6 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction, createAsyncThunk} from '@reduxjs/toolkit';
+
+import {GetAllGroups} from './services/my-groups-service';
 import Group from '~models/group';
 
 export type MyGroupsState = {
@@ -6,25 +8,30 @@ export type MyGroupsState = {
 };
 
 const initialState: MyGroupsState = {
-  groups: [
-    {
-      id: 1,
-      name: 'Group 1',
-    },
-    {
-      id: 2,
-      name: 'Group 2',
-    },
-  ],
+  groups: [],
 };
+
+export const getAllGroups = createAsyncThunk(
+  'groups/getAllGroupsApi',
+  GetAllGroups,
+);
 
 export const myGroupsSlice = createSlice({
   name: 'groups',
   initialState,
   reducers: {
     addGroup: (state, action: PayloadAction<Group>) => {
-      state.groups.push(action.payload);
+      // state.groups = [];
+      state.groups = [];
     },
+  },
+  extraReducers: builder => {
+    builder.addCase(getAllGroups.fulfilled, (state, action) => {
+      state.groups = [...state.groups, ...action.payload];
+    });
+    builder.addCase(getAllGroups.rejected, state => {
+      console.error('Error');
+    });
   },
 });
 
