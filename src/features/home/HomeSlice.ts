@@ -16,5 +16,3 @@ export const homeSlice = createSlice({
 });
 
 export default homeSlice.reducer;
-
-export const selectAllGroups = (state: RootState) => state.groups.groups;

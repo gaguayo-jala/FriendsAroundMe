@@ -40,7 +40,7 @@ export const GetAllGroups = (): Promise<Group[]> => {
     },
     {
       id: 1,
-      name: 'Friends',
+      name: 'Friends Modified',
       participants: [],
     },
     {
