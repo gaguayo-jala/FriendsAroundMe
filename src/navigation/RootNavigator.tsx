@@ -1,12 +1,11 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-
-import FriendsStackNavigator from './FriendsStackNavigator';
+import FriendsDrawerNavigator from './FriendsDrawerNavigator';
 
 const RootNavigator = () => {
   return (
     <NavigationContainer>
-      <FriendsStackNavigator />
+      <FriendsDrawerNavigator />
     </NavigationContainer>
   );
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import {Provider} from 'react-redux';
+import 'react-native-gesture-handler';
 
 import RootNavigator from '~navigation/RootNavigator';
 import {AppContext} from '~state/AppContext';

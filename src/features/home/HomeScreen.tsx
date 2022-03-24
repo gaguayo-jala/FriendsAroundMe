@@ -1,11 +1,12 @@
 import {StyleSheet, View, Button} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 import RootStackParamList from '~navigation/RootStackParamList';
 import MyGroups from './components/MyGroups';
 import {addGroup, removeAllGroups} from '~features/my-groups/MyGroupsSlice';
+import {getAllUsers} from '~infrastructure/index';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'home'>;
 
@@ -19,6 +20,12 @@ const HomeScreen: React.FC<Props> = ({}) => {
   const removeAllGroupsHandler = () => {
     dispatch(removeAllGroups());
   };
+
+  useEffect(() => {
+    getAllUsers().then(users => {
+      console.log('USERS', users);
+    });
+  }, []);
 
   return (
     <View style={styles.main}>
