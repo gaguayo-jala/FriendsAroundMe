@@ -14,3 +14,18 @@ export const getAllUsers = async (): Promise<User[]> => {
 
   return allUsers;
 };
+
+export const findUserByEmail = async (email: string): Promise<User | null> => {
+  let foundUser: User | null = null;
+  const querySnapshot = await firestore()
+    .collection(userCollection)
+    .where('email', '==', email)
+    .limit(1)
+    .get();
+
+  querySnapshot.forEach(user => {
+    foundUser = user.data() as User;
+  });
+
+  return foundUser;
+};

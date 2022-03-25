@@ -10,6 +10,7 @@ import {
 import RootStackParamList from '~navigation/RootStackParamList';
 import {AppContext} from '~state/AppContext';
 import {save} from '~store/secure-store';
+import {findUserByEmail} from '~infrastructure/index';
 
 GoogleSignin.configure();
 
@@ -22,8 +23,13 @@ const LoginScreen: React.FC<LoginScreenProps & Props> = ({}) => {
 
   const onLoginHandler = async () => {
     await GoogleSignin.hasPlayServices();
-    const userInfo = await GoogleSignin.signIn();
-    await save('credentials', userInfo);
+    const credentials = await GoogleSignin.signIn();
+    const userInfo = await findUserByEmail(credentials.user.email);
+
+    console.log('USER FROM DB', userInfo);
+
+    await save('credentials', credentials);
+    await save('user', userInfo);
     login();
   };
 
