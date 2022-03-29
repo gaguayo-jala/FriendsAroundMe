@@ -26,11 +26,10 @@ const LoginScreen: React.FC<LoginScreenProps & Props> = ({}) => {
     const credentials = await GoogleSignin.signIn();
     const userInfo = await findUserByEmail(credentials.user.email);
 
-    console.log('USER FROM DB', userInfo);
-
     await save('credentials', credentials);
     await save('user', userInfo);
-    login();
+
+    login(userInfo!);
   };
 
   return (

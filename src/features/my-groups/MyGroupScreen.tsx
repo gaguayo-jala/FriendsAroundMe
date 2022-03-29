@@ -1,18 +1,23 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import RootStackParamList from '~navigation/RootStackParamList';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'myGroup'>;
 
 const MyGroupScreen: React.FC<Props> = ({
+  navigation,
   route: {
-    params: {groupId},
+    params: {group},
   },
 }) => {
+  useEffect(() => {
+    navigation.setOptions({title: group.name});
+  }, []);
+
   return (
     <View>
-      <Text>MyGroup is {groupId}</Text>
+      <Text>MyGroup is {group.id}</Text>
     </View>
   );
 };

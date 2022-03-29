@@ -6,11 +6,12 @@ import Group from '~models/group';
 
 export type MyGroupListItemProps = Group;
 
-const MyGroupListItem: React.FC<MyGroupListItemProps> = ({id, name}) => {
+const MyGroupListItem: React.FC<MyGroupListItemProps> = group => {
+  const {id, name} = group;
   const navigation = useNavigation<any>();
 
   const onPressItem = () => {
-    navigation.navigate('myGroup', {groupId: id});
+    navigation.navigate('myGroup', {group});
   };
 
   return (

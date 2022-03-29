@@ -1,9 +1,11 @@
+import Group from '~models/group';
+
 type RootStackParamList = {
   home: undefined;
   login: undefined;
   myGroups: undefined;
   myGroup: {
-    groupId: string;
+    group: Group;
   };
 };
 

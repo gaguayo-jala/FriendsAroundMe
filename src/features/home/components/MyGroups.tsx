@@ -1,21 +1,24 @@
 import {ScrollView, StyleSheet} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
-import {selectAllGroups, getAllGroups} from '~features/my-groups/MyGroupsSlice';
+import {AppContext} from '~state/AppContext';
+import {selectAllGroups, addGroups} from '~features/my-groups/MyGroupsSlice';
 import MyGroupListItem from './MyGroupListItem';
 import Group from '~models/group';
+import {subscribeToMyGroups} from '~infrastructure/index';
 
 const MyGroups = () => {
+  const {user} = useContext(AppContext);
   const dispatch = useDispatch();
   const groups: Group[] = useSelector(selectAllGroups);
 
-  const loadMyGroups = async () => {
-    dispatch(getAllGroups());
-  };
-
   useEffect(() => {
-    loadMyGroups();
+    const subcriber = subscribeToMyGroups(user!.id!, myGroups =>
+      dispatch(addGroups(myGroups)),
+    );
+
+    return () => subcriber();
   }, []);
 
   return (

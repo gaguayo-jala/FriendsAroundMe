@@ -6,6 +6,7 @@ import {AppContext} from '~state/AppContext';
 import {getObject} from '~store/secure-store';
 import Credentials from '~models/credentials';
 import * as constans from '~constants/system';
+import User from '~models/user';
 
 const LoadingScreen = () => {
   const {login, setIsLoading} = useContext(AppContext);
@@ -14,7 +15,8 @@ const LoadingScreen = () => {
     const credentials = await getObject<Credentials>(constans.credentials);
 
     if (credentials) {
-      login();
+      const userInfo = await getObject<User>(constans.userInfo);
+      login(userInfo!);
     }
 
     setIsLoading(false);

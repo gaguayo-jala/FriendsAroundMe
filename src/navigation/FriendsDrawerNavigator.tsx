@@ -20,7 +20,13 @@ const FriendsDrawerNavigator = () => {
     <Drawer.Navigator>
       {isAuthenticated ? (
         <>
-          <Drawer.Screen name="Home" component={FriendsStackNavigator} />
+          <Drawer.Screen
+            name="Home"
+            component={FriendsStackNavigator}
+            options={{
+              headerShown: false,
+            }}
+          />
           <Drawer.Screen name="Logout" component={LogoutScreen} />
         </>
       ) : (
