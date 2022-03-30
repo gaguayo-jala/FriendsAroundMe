@@ -10,9 +10,10 @@ import FriendIcon from '~atoms/FriendIcon';
 
 type HeaderProps = {
   title?: string | undefined;
+  onPressAddContacts: () => void;
 };
 
-const Header: React.FC<HeaderProps> = ({title}) => {
+const Header: React.FC<HeaderProps> = ({title, onPressAddContacts}) => {
   return (
     <View style={styles.container}>
       <Text>{title}</Text>
@@ -22,10 +23,7 @@ const Header: React.FC<HeaderProps> = ({title}) => {
           <FriendIcon name="dots-three-vertical" size={16} />
         </MenuTrigger>
         <MenuOptions>
-          <MenuOption
-            onSelect={() => alert('Add contact')}
-            text="Add Contact"
-          />
+          <MenuOption onSelect={onPressAddContacts} text="Add Contact" />
         </MenuOptions>
       </Menu>
     </View>

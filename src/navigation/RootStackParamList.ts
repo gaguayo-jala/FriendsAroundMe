@@ -7,6 +7,7 @@ type RootStackParamList = {
   myGroup: {
     group: Group;
   };
+  contacts: undefined;
 };
 
 export default RootStackParamList;

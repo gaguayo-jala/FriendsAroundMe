@@ -1,10 +1,11 @@
 import React from 'react';
-import {Text, View} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import MyGroupsScreen from '~features/my-groups/MyGroupsScreen';
 import MyGroupScreen from '~features/my-groups/MyGroupScreen';
 import HomeScreen from '~features/home/HomeScreen';
+import ContactScreen from '~features/my-groups/ContactsScreen';
+
 import RootStackParamList from './RootStackParamList';
 import Header from '~shared/Header';
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -23,9 +24,15 @@ const FriendsStackNavigator = () => {
         options={{
           title: 'My Group',
           headerShown: true,
-          header: ({options}) => <Header title={options.title} />,
+          header: ({options, navigation}) => (
+            <Header
+              title={options.title}
+              onPressAddContacts={() => navigation.navigate('contacts')}
+            />
+          ),
         }}
       />
+      <Stack.Screen name="contacts" component={ContactScreen} />
     </Stack.Navigator>
   );
 };
