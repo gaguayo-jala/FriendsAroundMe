@@ -6,6 +6,7 @@ import {
   MenuOption,
   MenuTrigger,
 } from 'react-native-popup-menu';
+import FriendIcon from '~atoms/FriendIcon';
 
 type HeaderProps = {
   title?: string | undefined;
@@ -18,7 +19,7 @@ const Header: React.FC<HeaderProps> = ({title}) => {
 
       <Menu>
         <MenuTrigger>
-          <Text>jsdjas</Text>
+          <FriendIcon name="dots-three-vertical" size={16} />
         </MenuTrigger>
         <MenuOptions>
           <MenuOption
