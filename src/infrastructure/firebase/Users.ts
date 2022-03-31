@@ -29,3 +29,20 @@ export const findUserByEmail = async (email: string): Promise<User | null> => {
 
   return foundUser;
 };
+
+export const checkContactEmails = async (
+  emails: string[],
+): Promise<string[]> => {
+  const validEmails: string[] = [];
+  const querySnapshot = await firestore()
+    .collection(userCollection)
+    .where('email', 'in', emails)
+    .get();
+
+  querySnapshot.forEach(user => {
+    const {email} = user.data() as User;
+    validEmails.push(email);
+  });
+
+  return validEmails;
+};

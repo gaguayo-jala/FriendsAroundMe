@@ -1,51 +1,90 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React, {useEffect} from 'react';
-import {PermissionsAndroid} from 'react-native';
+import {StyleSheet, ActivityIndicator, View} from 'react-native';
+import React, {useState} from 'react';
+import {PermissionsAndroid, ScrollView} from 'react-native';
 import Contacts from 'react-native-contacts';
+import {useFocusEffect} from '@react-navigation/native';
+
+import ContactRow from '~shared/Contact';
+import {checkContactEmails} from '~infrastructure/index';
 
 const ContactsScreen = () => {
+  const [loading, setLoading] = useState(false);
+  const [contacts, setContacts] = useState<Contacts.Contact[]>([]);
+
   const getContactsPermissions = async (): Promise<boolean> => {
-    try {
-      var hasPermissions = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
-        {
-          title: 'Contacts',
-          message: 'This app would like to view your contacts.',
-          buttonPositive: 'Please accept bare mortal',
-        },
-      );
-
-      console.info('Permissions', hasPermissions);
-
-      return !!hasPermissions;
-    } catch (error) {
-      console.log('ERROR', error);
-      return false;
-    }
+    return PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
+      {
+        title: 'Contacts',
+        message: 'This app would like to view your contacts.',
+        buttonPositive: 'Please accept bare mortal',
+      },
+    ).then(() => true);
   };
 
   const getContacts = async () => {
-    const hasPermissions = getContactsPermissions();
+    try {
+      setLoading(true);
 
-    if (!hasPermissions) {
-      return;
+      const hasPermissions = await getContactsPermissions();
+
+      if (!hasPermissions) {
+        return;
+      }
+
+      const allContact = await Contacts.getAll();
+
+      const contactsWithEmail = allContact
+        .map(contact => {
+          const [emailAddress = {email: ''}] = contact.emailAddresses;
+          const {email} = emailAddress;
+          return {...contact, email};
+        })
+        .filter(contact => contact.email);
+
+      const emails = contactsWithEmail.map(contact => contact.email);
+
+      const validEmails = await checkContactEmails(emails);
+
+      const validContacts = contactsWithEmail.filter(
+        contact => validEmails.indexOf(contact.email) > -1,
+      );
+
+      setContacts(validContacts);
+    } finally {
+      setLoading(false);
     }
-
-    const contacts = await Contacts.getAll();
-    console.info('CONTACTS', contacts);
   };
 
-  useEffect(() => {
-    getContacts();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      getContacts();
+    }, []),
+  );
+
+  if (loading) {
+    return (
+      <View style={styles.loading}>
+        <ActivityIndicator />
+      </View>
+    );
+  }
 
   return (
-    <View>
-      <Text>ContactsScreen</Text>
-    </View>
+    <ScrollView>
+      {contacts.map(contact => (
+        <ContactRow key={contact.recordID} {...contact} />
+      ))}
+    </ScrollView>
   );
 };
 
 export default ContactsScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  loading: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, TouchableWithoutFeedback} from 'react-native';
 import React from 'react';
 import {
   Menu,
@@ -20,7 +20,11 @@ const Header: React.FC<HeaderProps> = ({title, onPressAddContacts}) => {
 
       <Menu>
         <MenuTrigger>
-          <FriendIcon name="dots-three-vertical" size={16} />
+          <FriendIcon
+            name="dots-three-vertical"
+            size={16}
+            style={styles.menuButton}
+          />
         </MenuTrigger>
         <MenuOptions>
           <MenuOption onSelect={onPressAddContacts} text="Add Contact" />
@@ -47,5 +51,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+  },
+  menuButton: {
+    paddingHorizontal: 12,
   },
 });

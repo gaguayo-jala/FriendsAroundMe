@@ -21,3 +21,13 @@ export const subscribeToMyGroups = (
 
   return subcription;
 };
+
+export const updateGroup = async (group: Group): Promise<boolean> => {
+  return firestore()
+    .collection(groupsCollection)
+    .doc(`${group.id}`)
+    .set(group)
+    .then(() => {
+      return true;
+    });
+};
